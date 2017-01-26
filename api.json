@@ -1,0 +1,100 @@
+{
+  "name": "pagerduty-api",
+  "base_url": "https://events.pagerduty.com",
+  "enums": {
+    "event_type": {
+      "values": [
+        {
+          "name": "trigger"
+        },
+        {
+          "name": "acknowledge"
+        },
+        {
+          "name": "resolve"
+        }
+      ]
+    }
+  },
+  "models": {
+    "create_event": {
+      "fields": [
+        {
+          "name": "service_key",
+          "type": "string",
+          "required": "true"
+        },
+        {
+          "name": "event_type",
+          "type": "event_type",
+          "required": "true"
+        },
+        {
+          "name": "incident_key",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "details",
+          "type": "object",
+          "required": false
+        },
+        {
+          "name": "client",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "client_url",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "contexts",
+          "type": "object",
+          "required": false
+        }
+      ]
+    },
+    "result": {
+      "fields": [
+        {
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "name": "message",
+          "type": "string"
+        },
+        {
+          "name": "incident_key",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "resources": {
+    "create_event": {
+      "path": "/generic/2010-04-15/create_event.json",
+      "operations": [
+        {
+          "method": "POST",
+          "body": {
+            "type": "create_event"
+          },
+          "description": "Create an alert on Pagerduty",
+          "responses": {
+            "200": {
+              "type": "result"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
